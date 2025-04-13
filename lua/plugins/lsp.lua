@@ -128,6 +128,15 @@ return {
                             }
                         }
                     end,
+
+                    ['clangd'] = function ()
+                        require('lspconfig').clangd.setup {
+                            cmd = {
+                                "clangd",
+                                "--fallback-style=webkit"
+                            }
+                        }
+                    end
                 }
             })
         end
