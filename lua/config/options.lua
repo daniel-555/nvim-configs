@@ -2,6 +2,7 @@ local opt = vim.opt
 
 opt.relativenumber = true
 opt.number = true
+opt.scrolloff = 8
 
 opt.tabstop = 4
 opt.softtabstop = 4
@@ -38,4 +39,13 @@ opt.splitbelow = true
 
 opt.iskeyword:append("-")
 
-opt.formatoptions:remove({ "o" ,"r" ,"c" })
+opt.formatoptions:remove({ "o", "r", "c" })
+
+-- autocommands
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking text",
+    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})

@@ -37,10 +37,10 @@ return {
                             -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                             -- can also be a function to dynamically calculate max width such as
                             -- menu = function() return math.floor(0.45 * vim.o.columns) end,
-                            menu = 50, -- leading text (labelDetails)
-                            abbr = 50, -- actual suggestion item
+                            menu = 50,            -- leading text (labelDetails)
+                            abbr = 50,            -- actual suggestion item
                         },
-                        ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+                        ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
                         show_labelDetails = true, -- show labelDetails in menu. Disabled by default
                     })
                 },
@@ -92,19 +92,20 @@ return {
                 callback = function(event)
                     local opts = { buffer = event.buf }
 
-                    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-                    vim.keymap.set({ 'n', 'v' }, '<leader>cf', '<cmd>lua vim.lsp.buf.format()<cr>', opts)
-                    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-                    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-                    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-                    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-                    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-                    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-                    vim.keymap.set('n', '<leader>vd', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
-                    vim.keymap.set('n', '[d', '<cmd>lua  vim.diagnostic.goto_next()<cr>', opts)
-                    vim.keymap.set('n', ']d', '<cmd>lua  vim.diagnostic.goto_prev()<cr>', opts)
-                    vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-                    vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                    vim.keymap.set({ 'n', 'v' }, '<leader>fm', vim.lsp.buf.format, opts)
+                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+                    vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, opts)
+                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+                    vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
+                    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+                    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+                    vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
+                    vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
+                    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+                    vim.keymap.set('n', '<F4>', vim.lsp.buf.code_action, opts)
                 end,
             })
 
@@ -129,7 +130,7 @@ return {
                         }
                     end,
 
-                    ['clangd'] = function ()
+                    ['clangd'] = function()
                         require('lspconfig').clangd.setup {
                             cmd = {
                                 "clangd",
