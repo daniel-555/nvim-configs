@@ -54,7 +54,12 @@ require("lazy").setup({
             'nvim-lualine/lualine.nvim',
             dependencies = { 'nvim-tree/nvim-web-devicons' },
             opts = {}
-        }
+        },
+        {
+            'windwp/nvim-autopairs',
+            event = "InsertEnter",
+            opts = {}
+        },
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.
