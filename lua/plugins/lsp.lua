@@ -11,6 +11,7 @@ return {
         event = 'InsertEnter',
         config = function()
             local cmp = require('cmp')
+            local luasnip = require('luasnip')
 
             cmp.setup({
                 sources = {
@@ -22,7 +23,28 @@ return {
                     ['<C-d>'] = cmp.mapping.scroll_docs(4),
                     ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
                     ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-                    ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert })
+                    ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
+
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        elseif luasnip.locally_jumpable(1) then
+                            luasnip.jump(1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.locally_jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+
                 }),
                 snippet = {
                     expand = function(args)
@@ -56,7 +78,7 @@ return {
                 },
             })
         end,
-        dependencies = { 'onsails/lspkind.nvim' }
+        dependencies = { 'onsails/lspkind.nvim', 'L3MON4D3/LuaSnip' }
     },
 
     -- LSP
