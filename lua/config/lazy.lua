@@ -33,6 +33,14 @@ require("lazy").setup({
             branch = "harpoon2",
             dependencies = { "nvim-lua/plenary.nvim" }
         },
+
+        {
+            'numToStr/Comment.nvim',
+            opts = {
+                -- add any options here
+            }
+        },
+
         {
             "kylechui/nvim-surround",
             version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
