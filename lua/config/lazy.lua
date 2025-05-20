@@ -69,6 +69,11 @@ require("lazy").setup({
             event = "InsertEnter",
             opts = {}
         },
+        {
+            'tribela/transparent.nvim',
+            event = 'VimEnter',
+            config = true,
+        }
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.
