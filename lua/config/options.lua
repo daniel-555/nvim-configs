@@ -32,7 +32,8 @@ opt.signcolumn = "yes"
 
 opt.backspace = "indent,eol,start"
 
-opt.clipboard:append("unnamedplus")
+-- global clipboard
+-- opt.clipboard:append("unnamedplus")
 
 opt.splitright = true
 opt.splitbelow = true
